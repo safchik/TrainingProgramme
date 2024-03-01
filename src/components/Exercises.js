@@ -7,18 +7,7 @@ import ExerciseCard from './ExerciseCard';
 
 const Exercises = ({ exercises, setExercises, bodyPart }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [exercisesPerPage] = 9;
-
-    // Pagination
-    const indexOfLastExercise = currentPage * exercisesPerPage;
-    const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
-    const currentExercises = exercises.slice(indexOfFirstExercise, indexOfLastExercise);
-
-    const paginate = (event, value) => {
-        setCurrentPage(value);
-
-        window.scrollTo({ top: 1800, behavior: 'smooth' });
-    };
+    const [exercisesPerPage] = useState(9);
 
     useEffect(() => {
         const fetchExercisesData = async () => {
@@ -34,7 +23,18 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
         }
 
         fetchExercisesData();
-    }, [bodyPart]);
+    }, [bodyPart, setExercises]);
+
+    // Pagination
+    const indexOfLastExercise = currentPage * exercisesPerPage;
+    const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
+    const currentExercises = Array.isArray(exercises) ? exercises.slice(indexOfFirstExercise, indexOfLastExercise) : [];
+
+    const paginate = (event, value) => {
+        setCurrentPage(value);
+
+        window.scrollTo({ top: 1800, behavior: 'smooth' });
+    };
 
     return (
         <Box id='exercises' sx={{ mt: { lg: '110px' } }} mt='50px' p='20px'>
