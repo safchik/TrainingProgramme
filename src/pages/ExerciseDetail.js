@@ -7,7 +7,7 @@ import Detail from '../components/Detail';
 import ExerciseVideos from '../components/ExerciseVideos';
 import SimilarExercises from '../components/SimilarExercises';
 
-const ExerciseDetails = () => {
+const ExerciseDetail = () => {
     const [exerciseDetail, setExerciseDetail] = useState({});
     const { id } = useParams();
 
@@ -32,4 +32,4 @@ const ExerciseDetails = () => {
     )
 }
 
-export default ExerciseDetails
+export default ExerciseDetail
